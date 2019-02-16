@@ -2,6 +2,7 @@
 // Use of this source code is governed by the Apache 2.0
 // license that can be found in the LICENSE file.
 
+// Package randbitmap provides functions to generate random bitmaps.
 package randbitmap
 
 import (
@@ -14,6 +15,7 @@ import (
 
 type generator func(n int) int
 
+// Bitmap represents a random bitmap.
 type Bitmap struct {
 	width     uint
 	height    uint
@@ -22,6 +24,7 @@ type Bitmap struct {
 	image     *image.NRGBA
 }
 
+// NewBitmap creates new Bitmap.
 func NewBitmap(width uint, height uint, color bool) *Bitmap {
 	return &Bitmap{
 		width:    width,
@@ -30,10 +33,12 @@ func NewBitmap(width uint, height uint, color bool) *Bitmap {
 	}
 }
 
+// SetGenerator sets function that generates random numbers.
 func (bitmap *Bitmap) SetGenerator(generator generator) {
 	bitmap.generator = generator
 }
 
+// Render performs rendering and writes the bitmap to w.
 func (bitmap *Bitmap) Render(w io.Writer) error {
 	bitmap.image = image.NewNRGBA(image.Rect(0, 0, int(bitmap.width), int(bitmap.height)))
 	draw.Draw(bitmap.image, bitmap.image.Bounds(), &image.Uniform{C: color.White}, image.ZP, draw.Src)
