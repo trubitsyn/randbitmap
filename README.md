@@ -5,7 +5,7 @@ Generate random bitmaps.
 ![Random color bitmap](bitmaps/color.png)
 
 ## Installation
-`go get github.com/trubitsyn/randbitmap`
+`go get -u github.com/trubitsyn/randbitmap/cmd/randbitmap`
 
 ## Usage
 Execute `randbitmap` to save black & white 100x100 image to `random.png`.
@@ -25,7 +25,11 @@ Usage of randbitmap:
 ### Defaults
 `randbitmap -size=100 -color=false -file=random.png -overwrite=false`
 
-## Library usage
+## Library
+### Installation
+`go get -u github.com/trubitsyn/randbitmap`
+
+### Usage
 <pre>
 package main
 
