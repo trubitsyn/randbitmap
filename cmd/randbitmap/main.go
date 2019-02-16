@@ -44,10 +44,7 @@ func renderBitmap(bitmap *randbitmap.Bitmap, filename string) error {
 	if err != nil {
 		return err
 	}
-	if err := bitmap.Render(f); err != nil {
-		return err
-	}
-	return nil
+	return bitmap.Render(f)
 }
 
 func openFile(filename string) (*os.File, error) {

@@ -44,10 +44,7 @@ func (bitmap *Bitmap) Render(w io.Writer) error {
 	draw.Draw(bitmap.image, bitmap.image.Bounds(), &image.Uniform{C: color.White}, image.ZP, draw.Src)
 	colorFunc := getColorFunc(bitmap.hasColor, bitmap.generator)
 	drawPixels(bitmap.image, colorFunc)
-	if err := png.Encode(w, bitmap.image); err != nil {
-		return err
-	}
-	return nil
+	return png.Encode(w, bitmap.image)
 }
 
 func drawPixels(img *image.NRGBA, colorFunc func() (uint8, uint8, uint8)) {
@@ -65,10 +62,9 @@ func getColorFunc(color bool, generator generator) func() (uint8, uint8, uint8) 
 		return func() (uint8, uint8, uint8) {
 			return colorPixel(generator)
 		}
-	} else {
-		return func() (uint8, uint8, uint8) {
-			return bwPixel(generator)
-		}
+	}
+	return func() (uint8, uint8, uint8) {
+		return bwPixel(generator)
 	}
 }
 
